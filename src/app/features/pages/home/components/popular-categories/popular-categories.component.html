@@ -1,0 +1,27 @@
+<div class="my-5">
+  <owl-carousel-o [options]="customOptions">
+    @for (category of popCategories; track $index) {
+    <ng-template carouselSlide [id]="category._id">
+      <img
+        [src]="category.image"
+        [alt]="category.name"
+        [title]="category.slug"
+        class="object-cover h-[250px] rounded-ss-full hover:rounded-se-full transition-all duration-1000"
+      />
+    </ng-template>
+    }
+  </owl-carousel-o>
+  
+  <owl-carousel-o [options]="customOptionsReserved">
+    @for (category of popCategories; track $index) {
+    <ng-template carouselSlide [id]="category._id">
+      <img
+        [src]="category.image"
+        [alt]="category.name"
+        [title]="category.slug"
+        class="object-cover h-[250px] rounded-ss-full hover:rounded-se-full transition-all duration-1000"
+      />
+    </ng-template>
+    }
+  </owl-carousel-o>
+</div>

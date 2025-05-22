@@ -1,0 +1,176 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="max-w-md mx-auto">
+  <div class="my-5">
+    @let getControlEmail = loginForm.get("email");
+    <label
+      for="email-address-icon"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Your Email</label
+    >
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 16"
+        >
+          <path
+            d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"
+          />
+          <path
+            d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"
+          />
+        </svg>
+      </div>
+      <input
+        formControlName="email"
+        type="email"
+        id="email-address-icon"
+        class="main-input peer"
+        placeholder="name@.com"
+      />
+    </div>
+
+    <!-- @if(getControlEmail?.errors && getControlEmail?.touched) {
+
+    <div
+      class="flex p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
+      <svg
+        class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+        />
+      </svg>
+      <span class="sr-only">Danger</span>
+      <div>
+        <ul class="list-inside">
+          @if (getControlEmail?.getError('required')) {
+          <li>Email is required</li>
+          } @else if (getControlEmail?.getError('email')) {
+          <li>{{ "Invalid Email Should contain @ and .com" }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+    } -->
+    <app-error-message [ControlName]="getControlEmail"></app-error-message>
+  </div>
+
+  <div class="my-4">
+    @let getControlPassword = loginForm.get("password");
+    <label
+      for="user-password"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Your Password
+    </label>
+    <div class="relative">
+      <div
+        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+      >
+        <svg
+          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M6 8V6a4 4 0 1 1 8 0v2h2V6a6 6 0 0 0-12 0v2H0v10h20V8h-4Zm-2 2h12v6H4v-6Z"
+          />
+        </svg>
+      </div>
+      <input
+        formControlName="password"
+        [type]="!toggleInput ? 'password' : 'text'"
+        id="user-password"
+        class="main-input peer"
+        placeholder="Write_Password"
+      />
+      <span
+        (click)="togglePassword()"
+        class="absolute top-[50%] transform -translate-y-[50%] right-2 cursor-pointer"
+        >@if (toggleInput) {<i class="fa fa-eye ms-2"></i>}@else {<i
+          class="fa fa-eye-low-vision"
+        ></i
+        >}
+      </span>
+    </div>
+
+    <!-- @if(getControlPassword?.errors && getControlPassword?.touched) {
+
+    <div
+      class="flex p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
+      <svg
+        class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+        />
+      </svg>
+      <span class="sr-only">Danger</span>
+      <div>
+        <ul class="list-inside">
+          @if (getControlPassword?.getError('required')) {
+          <li>Password is required</li>
+          } @else if (getControlPassword?.getError('pattern')) {
+          <li>
+            Minimum eight and maximum 10 characters, at least one uppercase
+            letter, one lowercase letter, one number and one special character
+          </li>
+          }
+        </ul>
+      </div>
+    </div>
+    } -->
+    <app-error-message [ControlName]="getControlPassword"></app-error-message>
+  </div>
+
+  @if (apiError) {
+  <div
+    class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+    role="alert"
+  >
+    <svg
+      class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path
+        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+      />
+    </svg>
+    <span class="sr-only">Danger</span>
+    <div>
+      <ul class="mt-1 list-inside">
+        <li>{{ apiError }}</li>
+      </ul>
+    </div>
+  </div>
+  }
+
+  <button
+    type="submit"
+    class="cursor-pointer my-4 text-white bg-main hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  >
+    @if (isCallingApi) { <i class="fa fa-spin fa-spinner px-4"></i> }@else{
+    Login }
+  </button>
+</form>

@@ -1,0 +1,73 @@
+@if (ApiError) {
+<h1 class="text-red-600 text-4xl text-center my-6">Failed to load product</h1>
+}@else {
+<section>
+  <div class="container mx-auto my-12">
+    <div class="grid sm:grid-cols-12">
+      <div class="sm:col-span-4 overflow-hidden px-2">
+        <owl-carousel-o [options]="customOptions">
+          @for (source of productDetails.images; track $index) {
+          <ng-template carouselSlide [id]="source">
+            <img
+              [src]="source"
+              [alt]="source"
+              [title]="source"
+              class="w-100 hover:scale-150 transition-all duration-1000"
+            />
+          </ng-template>
+          }
+        </owl-carousel-o>
+        <!-- <img
+          [src]="productDetails.imageCover"
+          class="w-100 hover:rounded-full hover:scale-150 transition-all duration-1000"
+          alt=""
+        /> -->
+      </div>
+      <div class="sm:col-span-8 flex flex-col justify-center px-4">
+        <h1 class="font-bold text-4xl">{{ productDetails.title }}</h1>
+        <p class="my-5">{{ productDetails.description }}</p>
+        <!-- <span class="text-2xl">{{ productDetails?.category?.name }}</span> -->
+        <div class="flex justify-between">
+          <p class="text-red-500">Price : {{ productDetails.price }} $</p>
+          <p>
+            <i class="fa-solid fa-star text-rating me-1"></i
+            >{{ productDetails.ratingsAverage }}
+          </p>
+        </div>
+        <button
+          (click)="addProductToCart(productDetails._id)"
+          class="main-btn opacity-100"
+        >
+          @if(isLoading){
+          <i class="fa fa-spin fa-spinner"></i> Loading... }@else {Add To Cart}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <button
+    (click)="visiableRelatedProducts()"
+    class="main-btn opacity-100 mb-20"
+  >
+    @if (visiableProducts) {Disappear Related Products...}@else {Show Related
+    Products... }
+  </button>
+  @if(visiableProducts){
+  <h2 #related class="text-center font-bold my-15 text-4xl text-main">
+    Related Products
+  </h2>
+  @defer (on viewport(related)) {
+  <div class="container mx-auto my-8">
+    <div
+      class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-7 mb-5"
+    >
+      @for (product of recentProducts; track product._id) {
+      <app-product-item [product]="product"></app-product-item>
+      }
+    </div>
+  </div>
+  } }
+</section>
+}

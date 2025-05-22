@@ -1,0 +1,17 @@
+@if (isLoading) {
+<section class="container mx-auto shadow-2xl bg-light p-12 m-10 rounded-2xl overflow-y-scroll h-screen">
+  <h1 class="text-4xl font-bold my-3">Shop Cart :</h1>
+  <p class="text-main text-xl mt-3 mb-4 font-bold">
+    Total Cart Price : {{ cartDetails.data.totalCartPrice }} $
+  </p>
+
+  @for (item of cartDetails.data.products; track $index) {
+  <app-cart-item [product]="item" />
+  }
+</section>
+
+}@else {
+<h2 class="text-main text-center text-6xl my-10">
+  <i class="fa fa-spin fa-spinner"></i> Loading...
+</h2>
+}
