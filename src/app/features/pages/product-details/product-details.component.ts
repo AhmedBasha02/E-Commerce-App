@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../../app/shared/services/product/product.service';
 import { Product } from '../../../../shared/interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import e from 'express';
 import { ProductItemComponent } from '../../../shared/ui/product-item/product-item.component';
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
